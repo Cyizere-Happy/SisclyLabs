@@ -3,10 +3,15 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
+interface DropdownItem {
+    label: string;
+    href: string;
+}
+
 interface NavLinkProps {
     label: string;
     href: string;
-    dropdown?: string[];
+    dropdown?: DropdownItem[];
 }
 
 function NavLink({ label, href, dropdown }: NavLinkProps) {
@@ -35,16 +40,16 @@ function NavLink({ label, href, dropdown }: NavLinkProps) {
 
             {/* Dropdown Menu */}
             {dropdown && (
-                <div className={`absolute top-full left-1/2 -translate-x-1/2 w-40 bg-white border border-black/5 shadow-xl rounded-lg overflow-hidden transition-all duration-300 z-[110] ${isOpen ? 'opacity-100 translate-y-2 visible' : 'opacity-0 translate-y-4 invisible'}`}>
+                <div className={`absolute top-full left-1/2 -translate-x-1/2 w-44 bg-white border border-black/5 shadow-xl rounded-lg overflow-hidden transition-all duration-300 z-[110] ${isOpen ? 'opacity-100 translate-y-2 visible' : 'opacity-0 translate-y-4 invisible'}`}>
                     <div className="h-[2px] w-full bg-black" />
                     <div className="py-1">
                         {dropdown.map((item, idx) => (
                             <Link
                                 key={idx}
-                                href="#"
+                                href={item.href}
                                 className="block px-3 py-1.5 text-[9px] font-bold uppercase tracking-tight text-black/60 hover:text-black hover:bg-zinc-50 transition-all border-b border-black/[0.02] last:border-0"
                             >
-                                {item}
+                                {item.label}
                             </Link>
                         ))}
                     </div>
@@ -72,10 +77,29 @@ export default function Navbar() {
                 {/* Right: Links Grouped */}
                 <div className="flex h-full items-center">
                     <NavLink label="Home" href="/" />
-                    <NavLink label="Tutorial" href="#" dropdown={['WordPress Template', 'Google Adsense', 'Bootstrap Developing', 'Game Design']} />
-                    <NavLink label="Portfolio" href="/portfolio" dropdown={['UI/UX Design', 'Motion Graphics', 'Embedded Systems', 'OS Development']} />
+                    <NavLink label="Tutorial" href="#" dropdown={[
+                        { label: 'WordPress Template', href: '#' },
+                        { label: 'Google Adsense', href: '#' },
+                        { label: 'Bootstrap Dev', href: '#' },
+                        { label: 'Game Design', href: '#' },
+                    ]} />
+                    <NavLink label="Services" href="/services" dropdown={[
+                        { label: 'Brand Identity', href: '/services/brand-identity' },
+                        { label: 'UI/UX Design', href: '/services/ui-ux-design' },
+                        { label: 'Software Dev', href: '/services/software-dev' },
+                        { label: 'Motion Graphics', href: '/services/motion-graphics' },
+                        { label: 'Embedded Systems', href: '/services/embedded-systems' },
+                        { label: 'OS Development', href: '/services/os-development' },
+                        { label: 'Game Development', href: '/services/game-development' },
+                        { label: '3D Modeling', href: '/services/3d-modeling' },
+                    ]} />
                     <NavLink label="Blog" href="#" />
-                    <NavLink label="Our Team" href="#" dropdown={['Project Managers', 'Designers', 'Engineers', 'QA Leads']} />
+                    <NavLink label="Our Team" href="#" dropdown={[
+                        { label: 'Project Managers', href: '#' },
+                        { label: 'Designers', href: '#' },
+                        { label: 'Engineers', href: '#' },
+                        { label: 'QA Leads', href: '#' },
+                    ]} />
                     <NavLink label="Contact Us" href="/contact" />
                 </div>
             </div>

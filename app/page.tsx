@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import OnboardingGuide from './components/OnboardingGuide';
 import ProjectShowcase from './components/ProjectShowcase';
+import Link from 'next/link';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -86,60 +87,22 @@ const milestones = [
 ];
 
 const services = [
-  {
-    id: 1,
-    title: 'Brand Identity',
-    description: 'Crafting unique visual languages that resonate and build trust.',
-    number: '1.'
-  },
-  {
-    id: 2,
-    title: 'UI/UX Design',
-    description: 'Intuitive interfaces and seamless journeys for digital excellence.',
-    number: '2.'
-  },
-  {
-    id: 3,
-    title: 'Software Dev',
-    description: 'Scalable, robust applications built with modern architectures.',
-    number: '3.'
-  },
-  {
-    id: 4,
-    title: 'Embedded Systems',
-    description: 'Low-level engineering for hardware that moves the world.',
-    number: '4.'
-  },
-  {
-    id: 5,
-    title: 'Motion Graphics',
-    description: 'Fluid animations that bring static designs to life.',
-    number: '5.'
-  },
-  {
-    id: 6,
-    title: 'OS Development',
-    description: 'Building the core foundations of modern computing.',
-    number: '6.'
-  },
-  {
-    id: 7,
-    title: 'Game Development',
-    description: 'Immersive worlds and mechanics for the next generation.',
-    number: '7.'
-  },
-  {
-    id: 8,
-    title: '3D Modeling & Design',
-    description: 'Creating high-fidelity spatial assets and immersive product visuals.',
-    number: '8.'
-  }
+  { id: 1, slug: 'brand-identity', title: 'Brand Identity', description: 'Crafting unique visual languages that resonate and build trust.', number: '1.' },
+  { id: 2, slug: 'ui-ux-design', title: 'UI/UX Design', description: 'Intuitive interfaces and seamless journeys for digital excellence.', number: '2.' },
+  { id: 3, slug: 'software-dev', title: 'Software Dev', description: 'Scalable, robust applications built with modern architectures.', number: '3.' },
+  { id: 4, slug: 'embedded-systems', title: 'Embedded Systems', description: 'Low-level engineering for hardware that moves the world.', number: '4.' },
+  { id: 5, slug: 'motion-graphics', title: 'Motion Graphics', description: 'Fluid animations that bring static designs to life.', number: '5.' },
+  { id: 6, slug: 'os-development', title: 'OS Development', description: 'Building the core foundations of modern computing.', number: '6.' },
+  { id: 7, slug: 'game-development', title: 'Game Development', description: 'Immersive worlds and mechanics for the next generation.', number: '7.' },
+  { id: 8, slug: '3d-modeling', title: '3D Modeling & Design', description: 'Creating high-fidelity spatial assets and immersive product visuals.', number: '8.' },
 ];
 
 function ServiceCard({ data }: { data: typeof services[0] }) {
   return (
-    <div className="bg-[#fcfcfc] border border-black/5 p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 w-full max-w-[190px] relative group reveal">
-      {/* Decorative bar at top (like ref) */}
+    <Link href={`/services/${data.slug}`}
+      className="bg-[#fcfcfc] border border-black/5 p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 w-full max-w-[190px] relative group reveal block"
+    >
+      {/* Decorative bar at top */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-1 bg-black rounded-b-sm group-hover:w-12 transition-all duration-500" />
 
       <div className="pt-2">
@@ -148,9 +111,11 @@ function ServiceCard({ data }: { data: typeof services[0] }) {
         <p className="text-[10px] font-medium text-black/60 leading-tight italic">{data.description}</p>
       </div>
 
-      {/* Decorative bar at bottom (like ref) */}
+      {/* Arrow hint */}
+      <div className="absolute bottom-3 right-3 text-black/10 group-hover:text-black/40 transition-colors text-[10px] font-black">→</div>
+      {/* Decorative bar at bottom */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-black/10 rounded-t-sm" />
-    </div>
+    </Link>
   );
 }
 
@@ -186,7 +151,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="mb-6 md:mb-10"
           >
-            <span className="text-black text-xs md:text-sm font-medium tracking-tight">2014~2017</span>
+            <span className="text-black text-xs md:text-sm font-medium tracking-tight">2024 ~ NOW</span>
           </motion.div>
 
           <div className="relative w-full flex flex-col items-start">

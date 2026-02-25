@@ -1,8 +1,42 @@
 "use client";
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import OnboardingGuide from './components/OnboardingGuide';
 import ProjectShowcase from './components/ProjectShowcase';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.5,
+    },
+  },
+};
+
+const letterVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      damping: 15,
+      stiffness: 100,
+    },
+  },
+};
+
+const titleVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1, ease: "easeOut", delay: 0.2 }
+  }
+};
 
 const milestones = [
   {
@@ -132,6 +166,8 @@ const PATH_D =
 const VB_W = 900;
 const VB_H = 340;
 
+import Footer from './components/Footer';
+
 export default function Home() {
   const [activeNode, setActiveNode] = useState<number | null>(null);
 
@@ -143,23 +179,69 @@ export default function Home() {
 
       {/* ── SECTION 1: COVER ── */}
       <section className="min-h-screen bg-white flex flex-col items-center justify-center relative overflow-hidden font-sans px-4">
-        <div className="relative w-full max-w-4xl px-8 py-16 flex flex-col items-center md:items-start">
-          <div className="absolute top-0 left-8 md:static mb-6 md:mb-10">
+        <div className="relative w-full max-w-4xl px-8 py-16 flex flex-col items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mb-6 md:mb-10"
+          >
             <span className="text-black text-xs md:text-sm font-medium tracking-tight">2014~2017</span>
-          </div>
+          </motion.div>
 
-          <div className="relative w-full flex flex-col items-center md:items-start">
-            <h2 className="text-[12vw] md:text-[10vw] font-bold text-[#e0e0e0] leading-none select-none tracking-tight">VISUAL</h2>
+          <div className="relative w-full flex flex-col items-start">
+            <motion.h2
+              initial="hidden"
+              animate="visible"
+              variants={titleVariants}
+              className="text-[12vw] md:text-[10vw] font-bold text-[#e0e0e0] leading-none select-none tracking-tight"
+            >
+              VISUAL
+            </motion.h2>
+
             <div className="relative -mt-[6vw] md:-mt-[5vw] flex items-baseline w-full">
-              <h1 className="text-[14vw] md:text-[12vw] font-extrabold text-black leading-none tracking-tighter z-10 uppercase">SICILYLABS</h1>
-              <div className="flex-1 h-[2px] bg-black/40 self-end mb-[2.5vw] ml-1" />
+              <motion.h1
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+                className="text-[14vw] md:text-[12vw] font-extrabold text-black leading-none tracking-tighter z-10 uppercase flex whitespace-nowrap overflow-visible"
+              >
+                {"SICILYLABS".split("").map((letter, index) => (
+                  <motion.span
+                    key={index}
+                    variants={letterVariants}
+                    className="inline-block"
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </motion.h1>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.2, delay: 1.4, ease: "circOut" }}
+                className="flex-1 h-[4px] bg-black self-end mb-[2.5vw] ml-4 origin-left z-10"
+              />
             </div>
-            <h2 className="text-[12vw] md:text-[10vw] font-bold text-[#e0e0e0] leading-none select-none tracking-tight -mt-[4vw] md:-mt-[3vw]">DESIGN</h2>
+
+            <motion.h2
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+              className="text-[12vw] md:text-[10vw] font-bold text-[#e0e0e0] leading-none select-none tracking-tight -mt-[4vw] md:-mt-[3vw]"
+            >
+              DESIGN
+            </motion.h2>
           </div>
 
-          <div className="w-full flex justify-end mt-4 md:mt-0">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.8 }}
+            className="w-full flex justify-end mt-4 md:mt-0"
+          >
             <span className="text-black text-xs md:text-sm font-bold tracking-wide italic">young Innovators</span>
-          </div>
+          </motion.div>
         </div>
 
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-gray-400">
@@ -328,6 +410,7 @@ export default function Home() {
 
       <ProjectShowcase />
       <OnboardingGuide />
+      <Footer />
     </div>
   );
 }

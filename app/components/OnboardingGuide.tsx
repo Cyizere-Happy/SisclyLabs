@@ -1,58 +1,47 @@
-                                                                                                                                                                                                                                                           "use client";
+"use client";
 
 import React, { useState, useEffect } from 'react';
 
 const steps = [
     {
-        title: "Welcome to young Innovators",
-        description: "Explore the next generation of visual design. This guide will walk you through our mission and how to navigate the lab.",
-        icon: (
-            <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        )
+        title: "Rapid Innovation",
+        description: "We do Design & Software, delivering your high-end MVP in just 12 days. Fast, refined, and ready to scale.",
+        video: "/TourVideo.MOV"
     },
     {
-        title: "Visual Excellence",
+        title: "Studio Quality",
         description: "Our core philosophy is simple: push boundaries. We focus on high-impact visual layouts that resonate with modern aesthetics.",
-        icon: (
-            <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-        )
+        video: "/TourVideo.MOV"
     },
     {
         title: "Interactive Lab",
         description: "Scroll down to discover our interactive 'About Us' section. Each card presents a unique facet of our creative journey.",
-        icon: (
-            <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-            </svg>
-        )
+        video: "/TourVideo.MOV"
     },
     {
         title: "Global Aesthetic",
         description: "We draw inspiration from minimal, blocky, and industrial design patterns, combining them with high-end typography.",
-        icon: (
-            <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        )
+        video: "/TourVideo.MOV"
     },
     {
         title: "Join the Innovation",
         description: "Ready to start? Use the navigation buttons and explore the site. We are happy to have you here at the lab.",
-        icon: (
-            <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-        )
+        video: "/TourVideo.MOV"
     }
 ];
 
 export default function OnboardingGuide() {
     const [currentStep, setCurrentStep] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
+    const videoRef = React.useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        // Restart video when step changes
+        if (videoRef.current) {
+            videoRef.current.currentTime = 0;
+            videoRef.current.play().catch(() => { });
+        }
+    }, [currentStep]);
 
     useEffect(() => {
         // Check for cookie
@@ -115,15 +104,20 @@ export default function OnboardingGuide() {
                 {/* Content: Main Body */}
                 <div className="flex flex-col md:flex-row items-center gap-8 mb-10 transition-all duration-300">
                     {/* Visual Container */}
-                    <div className="w-full md:w-[45%] aspect-[4/3] bg-gray-50 rounded-[2rem] flex items-center justify-center relative group overflow-hidden border border-gray-100/50 flex-shrink-0">
-                        <div className="transition-transform duration-700 group-hover:scale-110">
-                            {/* Larger Icons */}
-                            {React.cloneElement(steps[currentStep].icon as React.ReactElement<any>, { className: "w-20 h-20 text-gray-300" })}
-                        </div>
-                        {/* Play Button Icon Overlay */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-14 h-14 bg-white/80 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 cursor-pointer">
-                                <svg className="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24">
+                    <div className="w-full md:w-[45%] aspect-[4/3] bg-black rounded-[2rem] flex items-center justify-center relative group overflow-hidden border border-gray-100/50 flex-shrink-0">
+                        <video
+                            ref={videoRef}
+                            src={steps[currentStep].video}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        />
+                        {/* Play Button Icon Overlay (Visible on Hover Only) */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
+                                <svg className="w-6 h-6 ml-1 text-white/80" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
                             </div>

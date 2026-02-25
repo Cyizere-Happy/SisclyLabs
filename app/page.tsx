@@ -143,7 +143,7 @@ export default function Home() {
     <div className="bg-white min-h-screen">
 
       {/* ── SECTION 1: COVER ── */}
-      <section className="min-h-screen bg-white flex flex-col items-center justify-center relative overflow-hidden font-sans px-4">
+      <section id="hero" className="min-h-screen bg-white flex flex-col items-center justify-center relative overflow-hidden font-sans px-4">
         <div className="relative w-full max-w-4xl px-8 py-16 flex flex-col items-start">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -218,7 +218,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 2: OUR SERVICES ── */}
-      <section className="bg-white pt-16 pb-0 md:pt-24 md:pb-12 relative overflow-hidden">
+      <section id="services" className="bg-white pt-16 pb-0 md:pt-24 md:pb-12 relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-8 relative z-10">
           <div className="text-center mb-16 md:mb-20">
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-black">Our Services</h2>
@@ -275,7 +275,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 3: ABOUT US / EVOLUTION TIMELINE ── */}
-      <section className="bg-white pt-16 pb-8 md:pt-24 md:pb-12 overflow-hidden">
+      <section id="about" className="bg-white pt-16 pb-8 md:pt-24 md:pb-12 overflow-hidden">
         <div className="relative w-full max-w-5xl mx-auto px-6 md:px-12">
 
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-black mb-2">About Us</p>
@@ -373,7 +373,8 @@ export default function Home() {
         </div>
       </section>
 
-      <ProjectShowcase />
+      <div id="projects"><ProjectShowcase /></div>
+
       <OnboardingGuide />
       <Footer />
     </div>

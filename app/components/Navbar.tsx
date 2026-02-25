@@ -77,11 +77,12 @@ export default function Navbar() {
                 {/* Right: Links Grouped */}
                 <div className="flex h-full items-center">
                     <NavLink label="Home" href="/" />
-                    <NavLink label="Tutorial" href="#" dropdown={[
-                        { label: 'WordPress Template', href: '#' },
-                        { label: 'Google Adsense', href: '#' },
-                        { label: 'Bootstrap Dev', href: '#' },
-                        { label: 'Game Design', href: '#' },
+                    <NavLink label="Explore" href="/" dropdown={[
+                        { label: 'Hero', href: '/#hero' },
+                        { label: 'Our Services', href: '/#services' },
+                        { label: 'About Us', href: '/#about' },
+                        { label: 'Featured Projects', href: '/#projects' },
+                        { label: 'Get Started', href: '/contact' },
                     ]} />
                     <NavLink label="Services" href="/services" dropdown={[
                         { label: 'Brand Identity', href: '/services/brand-identity' },

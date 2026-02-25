@@ -118,7 +118,7 @@ export default function OnboardingGuide() {
                     <div className="w-full md:w-[45%] aspect-[4/3] bg-gray-50 rounded-[2rem] flex items-center justify-center relative group overflow-hidden border border-gray-100/50 flex-shrink-0">
                         <div className="transition-transform duration-700 group-hover:scale-110">
                             {/* Larger Icons */}
-                            {React.cloneElement(steps[currentStep].icon as React.ReactElement, { className: "w-20 h-20 text-gray-300" })}
+                            {React.cloneElement(steps[currentStep].icon as React.ReactElement<any>, { className: "w-20 h-20 text-gray-300" })}
                         </div>
                         {/* Play Button Icon Overlay */}
                         <div className="absolute inset-0 flex items-center justify-center">

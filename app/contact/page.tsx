@@ -1,15 +1,20 @@
 'use client';
 
 import React from 'react';
-import Spline from '@splinetool/react-spline';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 
-export default function ContactPage() {
-    const [isMounted, setIsMounted] = React.useState(false);
+// Dynamic import for SplineScene to prevent SSR/Hydration errors
+const SplineScene = dynamic(() => import('../components/SplineScene'), {
+    ssr: false,
+    loading: () => (
+        <div className="text-[10px] font-bold uppercase tracking-widest opacity-20">
+            Initializing 3D Engine...
+        </div>
+    ),
+});
 
-    React.useEffect(() => {
-        setIsMounted(true);
-    }, []);
+export default function ContactPage() {
 
     return (
         <main className="min-h-screen bg-white relative overflow-hidden font-sans pt-20 selection:bg-black selection:text-white">
@@ -105,15 +110,9 @@ export default function ContactPage() {
                         transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
                         className="w-full h-full relative"
                     >
-                        {isMounted ? (
-                            <React.Suspense fallback={<div className="text-[10px] font-bold uppercase tracking-widest opacity-20">Loading Scene...</div>}>
-                                <Spline
-                                    scene="https://prod.spline.design/seQ9kDrJEjIsd29a/scene.splinecode"
-                                />
-                            </React.Suspense>
-                        ) : (
-                            <div className="text-[10px] font-bold uppercase tracking-widest opacity-20">Preparing 3D Engine...</div>
-                        )}
+                        <SplineScene
+                            scene="https://prod.spline.design/seQ9kDrJEjIsd29a/scene.splinecode"
+                        />
 
                         {/* Overlay to catch clicks if needed, or just let users interact with Spline */}
                         <div className="absolute inset-0 pointer-events-none border-[20px] border-white/40 backdrop-blur-[2px] rounded-[40px] m-4 md:m-12 border-dashed opacity-20" />

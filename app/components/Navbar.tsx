@@ -76,7 +76,7 @@ export default function Navbar() {
                     <NavLink label="Portfolio" href="/portfolio" dropdown={['UI/UX Design', 'Motion Graphics', 'Embedded Systems', 'OS Development']} />
                     <NavLink label="Blog" href="#" />
                     <NavLink label="Our Team" href="#" dropdown={['Project Managers', 'Designers', 'Engineers', 'QA Leads']} />
-                    <NavLink label="Contact Us" href="#" />
+                    <NavLink label="Contact Us" href="/contact" />
                 </div>
             </div>
         </nav>

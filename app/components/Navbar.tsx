@@ -93,7 +93,7 @@ export default function Navbar() {
                         { label: 'Game Development', href: '/services/game-development' },
                         { label: '3D Modeling', href: '/services/3d-modeling' },
                     ]} />
-                    <NavLink label="Blog" href="#" />
+                    <NavLink label="Blog" href="/blog" />
                     <NavLink label="Our Team" href="#" dropdown={[
                         { label: 'Project Managers', href: '#' },
                         { label: 'Designers', href: '#' },

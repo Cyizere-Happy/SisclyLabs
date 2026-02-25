@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import OnboardingGuide from './components/OnboardingGuide';
 import ProjectShowcase from './components/ProjectShowcase';
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -16,7 +16,7 @@ const containerVariants = {
   },
 };
 
-const letterVariants = {
+const letterVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
@@ -29,7 +29,7 @@ const letterVariants = {
   },
 };
 
-const titleVariants = {
+const titleVariants: Variants = {
   hidden: { opacity: 0, x: -30 },
   visible: {
     opacity: 1,
@@ -130,8 +130,8 @@ const services = [
   },
   {
     id: 8,
-    title: 'Fullstack Solutions',
-    description: 'End-to-end integration from database to frontend.',
+    title: '3D Modeling & Design',
+    description: 'Creating high-fidelity spatial assets and immersive product visuals.',
     number: '8.'
   }
 ];
